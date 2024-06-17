@@ -11,7 +11,7 @@ A React app using Firebase for secure email/password authentication. 🔐✨
 1. Clone the repository.
 2. Install dependencies using `npm install`.
 3. Add your Firebase configuration in `src/firebase/firebaseConfig.js`.
-4. Run the app using `npm start`.
+4. Run the app using `npm run dev`.
 
 ## Folder Structure
 - `src/components`: React components.
