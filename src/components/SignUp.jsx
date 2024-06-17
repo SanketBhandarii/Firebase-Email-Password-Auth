@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import "./SignUp.css";
-import { app } from "../firebase";
+import { app } from "../../firebase";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { NavLink } from "react-router-dom";
