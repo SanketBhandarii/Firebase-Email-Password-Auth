@@ -1,6 +1,6 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import "./SignUp.css";
+import "../styles/SignUp.css";
 import { app } from "../../firebase";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -10,6 +10,8 @@ function Login() {
   const auth = getAuth(app);
   let email = useRef();
   let password = useRef();
+
+  let [eyeShow, setEyeShow] = useState(false);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -54,9 +56,22 @@ function Login() {
             />
           </div>
           <div className="inputGroup">
-            <label htmlFor="lname">Password</label>
+            <div className="eye">
+              <label htmlFor="lname">Password</label>
+              {eyeShow ? (
+                <i
+                  class="fa-solid fa-eye-slash"
+                  onClick={() => setEyeShow(!eyeShow)}
+                ></i>
+              ) : (
+                <i
+                  class="fa-solid fa-eye"
+                  onClick={() => setEyeShow(!eyeShow)}
+                ></i>
+              )}
+            </div>
             <input
-              type="password"
+              type={eyeShow ? "text" : "password"}
               id="password"
               name="password"
               autoComplete="off"

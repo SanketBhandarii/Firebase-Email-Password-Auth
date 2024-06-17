@@ -1,15 +1,18 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import "./SignUp.css";
+import "../styles/SignUp.css";
 import { app } from "../../firebase";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 function SignUp() {
   const auth = getAuth(app);
   let email = useRef();
   let password = useRef();
+  let navigate = useNavigate();
+
+  let [eyeShow, setEyeShow] = useState(false);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -18,10 +21,25 @@ function SignUp() {
       email.current.value,
       password.current.value
     )
-      .then(toast.success("Sign Up Successful", { position: "top-center" }))
-      .catch((err) => console.log(err));
-    email.current.value = "";
-    password.current.value = "";
+      .then(() => {
+        toast.success(
+          "Signup successful you will be redirected to login page",
+          { position: "top-center" }
+        );
+        email.current.value = "";
+        password.current.value = "";
+      })
+      .catch((error) => {
+        toast.error("SignUp failed. Please check details", {
+          position: "top-center",
+        });
+        email.current.value = "";
+        password.current.value = "";
+      });
+
+    setTimeout(() => {
+      navigate("/");
+    }, 6000);
   }
 
   return (
@@ -45,9 +63,22 @@ function SignUp() {
           />
         </div>
         <div className="inputGroup">
-          <label htmlFor="lname">Password</label>
+          <div className="eye">
+            <label htmlFor="lname">Password</label>
+            {eyeShow ? (
+              <i
+                class="fa-solid fa-eye-slash"
+                onClick={() => setEyeShow(!eyeShow)}
+              ></i>
+            ) : (
+              <i
+                class="fa-solid fa-eye"
+                onClick={() => setEyeShow(!eyeShow)}
+              ></i>
+            )}
+          </div>
           <input
-            type="text"
+            type={eyeShow ? "text" : "password"}
             id="password"
             name="password"
             autoComplete="off"
@@ -61,6 +92,7 @@ function SignUp() {
           <button type="submit">SignUp</button>
         </div>
       </form>
+      <ToastContainer />
     </div>
   );
 }

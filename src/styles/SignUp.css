@@ -40,7 +40,17 @@
     background-color: #c1dff32e; /* Blue background */
     color: #fff; /* White text */
   }
-  
+  .eye{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+  }
+  .eye>i{
+    position: relative;
+    top:35px;
+    margin-right: 10px;
+  }
   .inputGroup > input::placeholder {
     color: #ccc; /* Light gray placeholder */
   }
