@@ -18,7 +18,7 @@ function Login() {
     signInWithEmailAndPassword(
       auth,
       email.current.value,
-      password.current.value
+      password.current.valu
     )
       .then(() => {
         toast.success("Login Successful", { position: "top-center" });
