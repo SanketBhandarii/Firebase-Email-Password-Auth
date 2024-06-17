@@ -1,26 +1,24 @@
 import React, { useRef, useState } from "react";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import "../styles/SignUp.css";
-import { app } from "../../firebase";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { NavLink, useNavigate } from "react-router-dom";
+import { useFirebase } from "../../context/Firebase";
 
 function SignUp() {
-  const auth = getAuth(app);
+
   let email = useRef();
   let password = useRef();
   let navigate = useNavigate();
 
   let [eyeShow, setEyeShow] = useState(false);
+  let firebase = useFirebase();
+  console.log(firebase);
 
   function handleSubmit(event) {
     event.preventDefault();
-    createUserWithEmailAndPassword(
-      auth,
-      email.current.value,
-      password.current.value
-    )
+    firebase
+      .signUpWithEmailAndPassword(email.current.value, password.current.value)
       .then(() => {
         toast.success(
           "Signup successful you will be redirected to login page",
@@ -67,12 +65,12 @@ function SignUp() {
             <label htmlFor="lname">Password</label>
             {eyeShow ? (
               <i
-                class="fa-solid fa-eye-slash"
+                className="fa-solid fa-eye-slash"
                 onClick={() => setEyeShow(!eyeShow)}
               ></i>
             ) : (
               <i
-                class="fa-solid fa-eye"
+                className="fa-solid fa-eye"
                 onClick={() => setEyeShow(!eyeShow)}
               ></i>
             )}
