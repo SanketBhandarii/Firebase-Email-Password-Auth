@@ -1,0 +1,107 @@
+.addUser {
+    background-color: #34495e; /* Dark blue */
+    color: #fff; /* White text */
+    width: 400px;
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.3); /* Light shadow */
+    border-radius: 5px;
+    padding: 50px;
+    margin: auto;
+    margin-top: 20px;
+  }
+  .addUser > a > i {
+    font-size: 30px;
+    color: #fff; /* White */
+  }
+  
+  .addUser > form {
+    width: 100%;
+    margin-top: 30px;
+    border-radius: 2px;
+    border-color: #fff; /* White border */
+  }
+  
+  .inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  
+  .addUser > form > h3 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #fff; /* White */
+  }
+  
+  .inputGroup > input {
+    padding: 9px;
+    border: 1px solid #2980b9; /* Darker blue border */
+    border-radius: 5px;
+    background-color: #c1dff32e; /* Blue background */
+    color: #fff; /* White text */
+  }
+  
+  .inputGroup > input::placeholder {
+    color: #ccc; /* Light gray placeholder */
+  }
+  
+  .inputGroup > button {
+    border: 0;
+    outline: none;
+    background-color: #3498db; /* Blue */
+    color: #fff; /* White text */
+    font-weight: 600;
+    padding: 13px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  a {
+    color: #49b6ff; /* Blue link */
+  }
+  
+  .inputGroup > button:hover {
+    background-color: #1f6696; /* Darker blue on hover */
+  }
+  
+  @media (max-width: 441px) {
+    .addUser > form > h3 {
+      font-size: 20px;
+    }
+  
+    .inputGroup > input {
+      padding: 7px; /* Smaller padding */
+    }
+  
+    .inputGroup > button {
+      padding: 11px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .addUser {
+      width: 350px;
+      padding: 50px;
+    }
+  
+    .addUser > form > h3 {
+      font-size: 18px;
+    }
+  
+    .inputGroup > input {
+      padding: 9px;
+    }
+  
+    .inputGroup > button {
+      padding: 9px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .addUser {
+      width: 100%;
+      padding: 50px;
+    }
+  }
+  
