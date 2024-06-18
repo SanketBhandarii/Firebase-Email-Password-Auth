@@ -69,6 +69,7 @@ function Login() {
     <>
       {loggedIn ? (
         <div>
+          <ToastContainer />
           <h3 id="wel">Welcome, {userFirstName}!</h3>
           <img
             src="https://media1.giphy.com/media/lXo8uSnIkaB9e/giphy.gif"
@@ -78,7 +79,6 @@ function Login() {
           <div className="inputGroup">
             <button onClick={() => logout()}>LogOut</button>
           </div>
-          <ToastContainer />
         </div>
       ) : (
         <div className="addUser">
