@@ -4,40 +4,54 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useFirebase } from "../../context/Firebase";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../../context/Firebase";
 
 function SignUp() {
   let email = useRef();
   let password = useRef();
+  let fname = useRef();
+  let lname = useRef();
   let navigate = useNavigate();
 
   let [eyeShow, setEyeShow] = useState(false);
-
   let firebase = useFirebase();
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
-    firebase
-      .signUpWithEmailAndPassword(email.current.value, password.current.value)
-      .then(() => {
-        toast.success(
-          "Signup successful you will be redirected to login page",
-          { position: "top-center" }
-        );
 
-        email.current.value = "";
-        password.current.value = "";
-      })
-      .catch((error) => {
-        toast.error("SignUp failed. Please check details", {
-          position: "top-center",
-        });
-        email.current.value = "";
-        password.current.value = "";
+    try {
+      const userCredential = await firebase.signUpWithEmailAndPassword(
+        email.current.value,
+        password.current.value
+      );
+      const user = userCredential.user;
+
+      await setDoc(doc(db, "users", user.uid), {
+        fname: fname.current.value,
+        lname: lname.current.value,
+        email: email.current.value,
       });
 
-    setTimeout(() => {
-      navigate("/");
-    }, 6000);
+      toast.success(
+        "Signup successful! You will be redirected to the login page.",
+        { position: "top-center" }
+      );
+
+      email.current.value = "";
+      password.current.value = "";
+      fname.current.value = "";
+      lname.current.value = "";
+
+      setTimeout(() => {
+        navigate("/");
+      }, 3000); // Redirect after 3 seconds
+    } catch (error) {
+      console.error("Error during sign up:", error);
+      toast.error("SignUp failed. Please check details.", {
+        position: "top-center",
+      });
+    }
   }
 
   return (
@@ -49,6 +63,30 @@ function SignUp() {
         <br />
         <h3>Sign Up</h3>
 
+        <div className="inputGroup">
+          <label htmlFor="fname">First Name</label>
+          <input
+            type="text"
+            id="fname"
+            name="fname"
+            autoComplete="off"
+            placeholder="First Name"
+            ref={fname}
+            required
+          />
+        </div>
+        <div className="inputGroup">
+          <label htmlFor="lname">Last Name</label>
+          <input
+            type="text"
+            id="lname"
+            name="lname"
+            autoComplete="off"
+            placeholder="Last Name"
+            ref={lname}
+            required
+          />
+        </div>
         <div className="inputGroup">
           <label htmlFor="email">Email</label>
           <input
@@ -63,7 +101,7 @@ function SignUp() {
         </div>
         <div className="inputGroup">
           <div className="eye">
-            <label htmlFor="lname">Password</label>
+            <label htmlFor="password">Password</label>
             {eyeShow ? (
               <i
                 className="fa-solid fa-eye-slash"
