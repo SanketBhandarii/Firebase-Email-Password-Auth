@@ -57,7 +57,7 @@ function Login() {
         <div className="addUser" onSubmit={(event) => handleSubmit(event)}>
           <form method="POST">
             <p>
-              Don't have an account <NavLink to={"/signup"}>SignUp</NavLink>
+              Don't have an account? <NavLink to={"/signup"}>SignUp</NavLink>
             </p>
             <br />
             <h3>Login </h3>
