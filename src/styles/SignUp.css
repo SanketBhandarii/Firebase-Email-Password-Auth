@@ -45,6 +45,7 @@
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
+    user-select: none;
   }
   .eye>i{
     position: relative;
@@ -78,6 +79,7 @@
     padding: 8px 0px;
     font-size: 20px;
     border-radius: 5px;
+    margin-bottom: 10px;
   }
   img{
     border-radius: 5px;

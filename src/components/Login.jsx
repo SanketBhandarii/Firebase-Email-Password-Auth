@@ -47,11 +47,13 @@ function Login() {
     <>
       {loggedIn ? (
         <div>
-          <h3 id="wel">Welcome </h3>
-          <img src="https://media1.giphy.com/media/lXo8uSnIkaB9e/giphy.gif" width={400}/>
+          <h3 id="wel">Welcome !! </h3>
+          <img src="https://media1.giphy.com/media/lXo8uSnIkaB9e/giphy.gif" width={300}/>
           <div className="inputGroup">
             <button onClick={() => logout()}>LogOut</button>
           </div>
+          <ToastContainer />
+
         </div>
       ) : (
         <div className="addUser" onSubmit={(event) => handleSubmit(event)}>
@@ -103,7 +105,6 @@ function Login() {
               <button type="submit">Login</button>
             </div>
           </form>
-          <ToastContainer />
         </div>
       )}
     </>
