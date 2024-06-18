@@ -75,6 +75,7 @@ function Login() {
         </div>
       ) : (
         <div className="addUser">
+          <ToastContainer/>
           <form method="POST" onSubmit={handleSubmit}>
             <p>
               Don't have an account? <NavLink to={"/signup"}>SignUp</NavLink>
