@@ -6,7 +6,7 @@
     border-radius: 5px;
     padding: 50px;
     margin: auto;
-    margin-top: 20px;
+    margin-top: 10px;
   }
   .addUser > a > i {
     font-size: 30px;
@@ -70,7 +70,18 @@
   a {
     color: #49b6ff; /* Blue link */
   }
-  
+  #wel{
+    color: #ffffff;
+    font-weight: 600;
+    background-color: #49b6ff;
+    text-align: center;
+    padding: 8px 0px;
+    font-size: 20px;
+    border-radius: 5px;
+  }
+  img{
+    border-radius: 5px;
+  }
   .inputGroup > button:hover {
     background-color: #1f6696; /* Darker blue on hover */
   }

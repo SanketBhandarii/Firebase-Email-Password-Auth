@@ -6,14 +6,13 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useFirebase } from "../../context/Firebase";
 
 function SignUp() {
-
   let email = useRef();
   let password = useRef();
   let navigate = useNavigate();
 
   let [eyeShow, setEyeShow] = useState(false);
+
   let firebase = useFirebase();
-  console.log(firebase);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -24,6 +23,7 @@ function SignUp() {
           "Signup successful you will be redirected to login page",
           { position: "top-center" }
         );
+
         email.current.value = "";
         password.current.value = "";
       })
@@ -41,13 +41,14 @@ function SignUp() {
   }
 
   return (
-    <div className="addUser" onSubmit={(event) => handleSubmit(event)}>
-      <form method="POST">
+    <div className="addUser">
+      <form method="POST" onSubmit={(event) => handleSubmit(event)}>
         <p>
           Already have an account? <NavLink to={"/"}>Login</NavLink>
         </p>
         <br />
         <h3>Sign Up</h3>
+
         <div className="inputGroup">
           <label htmlFor="email">Email</label>
           <input

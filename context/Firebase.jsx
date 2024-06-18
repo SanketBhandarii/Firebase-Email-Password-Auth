@@ -4,6 +4,7 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -25,17 +26,25 @@ export const useFirebase = () => useContext(Firebase);
 
 const FireBaseProvider = (props) => {
   const signUpWithEmailAndPassword = (email, password) => {
-    return createUserWithEmailAndPassword(firebaseAuth, email, password)
+    return createUserWithEmailAndPassword(firebaseAuth, email, password);
   };
   const loginWithEmailAndPassword = (email, password) => {
     return signInWithEmailAndPassword(firebaseAuth, email, password);
   };
+  const logout = () => {
+    return signOut(firebaseAuth);
+  };
   return (
     <Firebase.Provider
-      value={{ signUpWithEmailAndPassword, loginWithEmailAndPassword }}
+      value={{
+        signUpWithEmailAndPassword,
+        loginWithEmailAndPassword,
+        logout,
+        firebaseAuth,
+      }}
     >
       {props.children}
-    </Firebase.Provider>    
+    </Firebase.Provider>
   );
 };
 
