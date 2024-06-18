@@ -90,7 +90,7 @@ function SignUp() {
         <div className="inputGroup">
           <label htmlFor="email">Email</label>
           <input
-            type="text"
+            type="email"
             id="email"
             name="email"
             autoComplete="off"

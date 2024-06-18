@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../styles/SignUp.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -10,18 +10,23 @@ import { db } from "../../context/Firebase";
 function Login() {
   const email = useRef();
   const password = useRef();
-  
+
   const [eyeShow, setEyeShow] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [userFirstName, setUserFirstName] = useState(null);
   const firebase = useFirebase();
 
+  useEffect(() => {
+    setLoggedIn(localStorage.getItem("loggedIn"));
+    setUserFirstName(localStorage.getItem("fname"));
+  }, []);
   async function fetchUserInfo(uid) {
     try {
       const userRef = doc(db, "users", uid);
       const docSnap = await getDoc(userRef);
       if (docSnap.exists()) {
         const userData = docSnap.data();
+        localStorage.setItem("fname", userData.fname);
         setUserFirstName(userData.fname);
       } else {
         console.log("No such document!");
@@ -38,6 +43,7 @@ function Login() {
       .then((userCredential) => {
         const user = userCredential.user;
         setLoggedIn(true);
+        localStorage.setItem("loggedIn", true);
         fetchUserInfo(user.uid); // Fetch user info using UID
         toast.success("Login Successful", { position: "top-center" });
         email.current.value = "";
@@ -55,6 +61,7 @@ function Login() {
   function logout() {
     firebase.logout();
     setLoggedIn(false);
+    localStorage.removeItem("loggedIn");
     setUserFirstName(null);
   }
 
@@ -75,7 +82,7 @@ function Login() {
         </div>
       ) : (
         <div className="addUser">
-          <ToastContainer/>
+          <ToastContainer />
           <form method="POST" onSubmit={handleSubmit}>
             <p>
               Don't have an account? <NavLink to={"/signup"}>SignUp</NavLink>
@@ -85,7 +92,7 @@ function Login() {
             <div className="inputGroup">
               <label htmlFor="email">Email</label>
               <input
-                type="text"
+                type="email"
                 id="email"
                 name="email"
                 autoComplete="off"
